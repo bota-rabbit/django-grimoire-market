@@ -11,7 +11,7 @@ class Grimoire(models.Model):
 
     def __str__(self):
         return self.title
-    
+
 class Order(models.Model):
     STATUS_CHOICES = [
         ('pending', '受付中'),

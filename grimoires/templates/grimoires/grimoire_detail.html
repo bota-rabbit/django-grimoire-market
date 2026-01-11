@@ -1,0 +1,35 @@
+{% extends 'grimoires/base.html' %}
+{% block content %}
+
+<div class="grimoire-detail-page">
+
+    <h1 class="grimoire-title">
+        {{ grimoire.title }}
+    </h1>
+
+    <div class="grimoire-detail">
+
+        <p class="grimoire-price">
+            価格: {{ grimoire.price }}円
+        </p>
+
+        <p class="grimoire-description">
+            解説: {{ grimoire.description }}
+        </p>
+
+        <p class="grimoire-stock">
+            在庫: {{ grimoire.stock }}
+        </p>
+
+    </div>
+
+    <div class="grimoire-actions">
+        <a href="{% url 'grimoires:grimoire_list' %}"
+           class="back-to-list">
+            一覧に戻る
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

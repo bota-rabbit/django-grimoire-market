@@ -1,0 +1,62 @@
+{% extends 'grimoires/base.html' %}
+{% block content %}
+
+<div class="grimoire-list-page">
+
+    <h1 class="page-title">商品一覧</h1>
+
+    {% if object_list %}
+        <ul class="grimoire-list">
+            {% for grimoire in object_list %}
+                <li class="grimoire-item">
+
+                    <strong class="grimoire-title">
+                        <a href="{% url 'grimoires:grimoire_detail' grimoire.pk %}"
+                           class="grimoire-link">
+                            {{ grimoire.title }}
+                        </a>
+                    </strong><br>
+
+                    <span class="grimoire-price">
+                        価格: {{ grimoire.price }}円
+                    </span><br>
+
+                    <span class="grimoire-stock">
+                        在庫: {{ grimoire.stock }}
+                    </span><br>
+
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="no-items-message">商品がありません。</p>
+    {% endif %}
+
+    <!-- ページ送り -->
+    {% if is_paginated %}
+        <div class="pagination">
+
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}"
+                   class="pagination-prev">
+                    前へ
+                </a>
+            {% endif %}
+
+            <span class="pagination-info">
+                ページ {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}"
+                   class="pagination-next">
+                    次へ
+                </a>
+            {% endif %}
+
+        </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}
