@@ -1,0 +1,15 @@
+{% extends 'grimoires/base.html' %}
+{% block content %}
+
+<h1 class="order-complete-title">ご購入ありがとうございました</h1>
+
+<p class="order-complete-message">
+    魔術書のご注文を確かに承りました。<br>
+    到着まで今しばらくお待ちくださいませ。
+</p>
+
+<a href="{% url 'grimoires:grimoire_list' %}" class="back-to-list">
+    商品一覧へ戻る
+</a>
+
+{% endblock %}

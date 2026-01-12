@@ -21,9 +21,11 @@
                         価格: {{ grimoire.price }}円
                     </span><br>
 
-                    <span class="grimoire-stock">
-                        在庫: {{ grimoire.stock }}
-                    </span><br>
+                    {% if grimoire.stock > 0 %}
+                        <span class="in-stock">在庫:{{ grimoire.stock }}</span><br>
+                    {% else %}
+                        <span class="sold-out">売り切れ</span><br>
+                    {% endif %}
 
                 </li>
             {% endfor %}

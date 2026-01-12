@@ -28,6 +28,10 @@ class Order(models.Model):
         choices=STATUS_CHOICES,
         default='pending'
     )
+    total_price = models.PositiveIntegerField(
+        '合計金額',
+        default=0
+    )
     created_at = models.DateTimeField('注文日時', auto_now_add=True)
 
     def __str__(self):

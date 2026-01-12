@@ -24,6 +24,16 @@
     </div>
 
     <div class="grimoire-actions">
+
+        {% if grimoire.stock > 0 %}
+            <form method="post" action="{% url 'grimoires:create_order' grimoire.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-buy">購入する</button>
+            </form>
+        {% else %}
+            <p class="sold-out">売り切れ</p>
+        {% endif %}
+
         <a href="{% url 'grimoires:grimoire_list' %}"
            class="back-to-list">
             一覧に戻る
