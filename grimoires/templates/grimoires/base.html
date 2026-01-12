@@ -1,21 +1,57 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ja" class="site-root">
+
     <head>
         <meta charset="utf-8">
         <meta name="viewport"
               content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <title class="site-title">📕 Arcane Grimoire Market（仮）</title>
+
+        <link rel="stylesheet"
+            href="{% static 'grimoires/css/style.css' %}">
+        
+        <!-- Material Icons -->    
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+            rel="stylesheet">
+
     </head>
 
     <body class="site-body">
 
         <header class="site-header">
+
+            <div class="notice-bar">
+                <span class="notice-text">
+                    ２冊以上購入で
+                    <span class="notice-free">送料無料</span>
+                </span>
+            </div>
+
             <div class="site-header-inner">
+
                 <h1 class="site-logo">
                     Arcane Grimoire Market
                 </h1>
+
+                <nav class="header-icons">
+                    <a href="#" class="header-icon" title="検索">
+                        <span class="material-icons-outlined">search</span>
+                    </a>
+                    <a href="#" class="header-icon" title="ログイン">
+                        <span class="material-icons-outlined">person</span>
+                    </a>
+                    <a href="#" class="header-icon" title="カート">
+                        <span class="material-icons-outlined">shopping_cart</span>
+                    </a>
+                    <a href="#" class="header-icon" title="おしらせ">
+                        <span class="material-icons-outlined">notifications</span>
+                    </a>
+                </nav>
+
             </div>
+
         </header>
 
         <main class="site-main">
@@ -32,4 +68,5 @@
         </footer>
 
     </body>
+    
 </html>
