@@ -7,7 +7,7 @@
         <meta name="viewport"
               content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title class="site-title">📕 Arcane Grimoire Market（仮）</title>
+        <title class="site-title">📔 Arcane Grimoire Market 📔</title>
 
         <link rel="stylesheet"
             href="{% static 'grimoires/css/style.css' %}">
@@ -32,7 +32,10 @@
             <div class="site-header-inner">
 
                 <h1 class="site-logo">
-                    Arcane Grimoire Market
+                    <a href="{% url 'grimoires:grimoire_list' %}"
+                    class="site-logo-link">
+                        Arcane Grimoire Market
+                    </a>
                 </h1>
 
                 <nav class="header-icons">
@@ -66,6 +69,25 @@
                 </p>
             </div>
         </footer>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const noticeBar = document.querySelector('.notice-bar');
+            const siteHeader = document.querySelector('.site-header');
+
+            if (!noticeBar || !siteHeader) return;
+
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 80) {
+                    noticeBar.classList.add('is-hidden');
+                    siteHeader.classList.add('is-notice-hidden');
+                } else {
+                    noticeBar.classList.remove('is-hidden');
+                    siteHeader.classList.remove('is-notice-hidden');
+                }
+            });
+        });
+        </script>
 
     </body>
     

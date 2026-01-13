@@ -8,23 +8,43 @@
     {% if object_list %}
         <ul class="grimoire-list">
             {% for grimoire in object_list %}
-                <li class="grimoire-item">
-
-                    <strong class="grimoire-title">
+                <li class="grimoire-item {% if grimoire.stock <= 0 %}is-sold-out{% endif %}">
+                    
+                    {% if grimoire.stock > 0 %}
                         <a href="{% url 'grimoires:grimoire_detail' grimoire.pk %}"
-                           class="grimoire-link">
-                            {{ grimoire.title }}
-                        </a>
-                    </strong><br>
+                        class="grimoire-card-link">
+                    {% endif %}
 
-                    <span class="grimoire-price">
-                        価格: 💎{{ grimoire.price }}
-                    </span><br>
+                        {% load static %}
+
+                        {% if grimoire.image %}
+                            <img src="{{ grimoire.image.url }}"
+                                alt="{{ grimoire.title }}"
+                                class="grimoire-thumb">
+                        {% else %}
+                            <img src="{% static 'grimoires/images/no-image.png' %}"
+                                alt="no image"
+                                class="grimoire-thumb">
+                        {% endif %}
+                        
+                        <div class="grimoire-info">
+                            <strong class="grimoire-title">
+                                {{ grimoire.title }}
+                            </strong>
+
+                            <span class="grimoire-price">
+                                価格: 💎{{ grimoire.price }}
+                            </span>
+
+                            {% if grimoire.stock > 0 %}
+                                <span class="in-stock">在庫:{{ grimoire.stock }}</span>
+                            {% else %}
+                                <span class="sold-out">売り切れ</span>
+                            {% endif %}
+                        </div>
 
                     {% if grimoire.stock > 0 %}
-                        <span class="in-stock">在庫:{{ grimoire.stock }}</span><br>
-                    {% else %}
-                        <span class="sold-out">売り切れ</span><br>
+                        </a>
                     {% endif %}
 
                 </li>

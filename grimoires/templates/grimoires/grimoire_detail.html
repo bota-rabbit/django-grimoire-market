@@ -3,6 +3,18 @@
 
 <div class="grimoire-detail-page">
 
+    {% load static %}
+
+    {% if grimoire.image %}
+        <img src="{{ grimoire.image.url }}"
+            alt="{{ grimoire.title }}"
+            class="grimoire-image">
+    {% else %}
+        <img src="{% static 'grimoires/images/no-image.png' %}"
+            alt="no image"
+            class="grimoire-image">
+    {% endif %}
+
     <h1 class="grimoire-title">
         {{ grimoire.title }}
     </h1>

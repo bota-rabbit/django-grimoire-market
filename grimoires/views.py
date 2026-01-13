@@ -3,13 +3,15 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from .models import Grimoire, Order, OrderItem
 
+
 class GrimoireListView(generic.ListView):
     model = Grimoire
-    paginate_by = 10    # 1ページに表示する件数
+    paginate_by = 12    # 1ページに表示する件数
     ordering = ['-created_at']    # 表示順序の指定
 
 class GrimoireDetailView(generic.DetailView):
     model = Grimoire
+
 
 @login_required
 def create_order(request, grimoire_id):
