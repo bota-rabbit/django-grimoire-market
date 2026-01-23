@@ -1,4 +1,6 @@
-/* ===== 全体 ===== */
+/* =====================================================
+   基本設定（全体）
+   ===================================================== */
 body {
     margin: 0;
     font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
@@ -8,48 +10,31 @@ body {
 }
 
 
-/* ===== ヘッダー（固定） ===== */
+/* =====================================================
+   ヘッダー全体（固定ヘッダー）
+   ===================================================== */
 .site-header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    border-bottom: 1px solid #e5e5e5;
     background: #fff;
+    border-bottom: 1px solid #e5e5e5;
     z-index: 1000;
-}
 
-.site-header-inner {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 12px 32px 8px; /* ← 上だけ多め */
+    /* 告知バー消失時の詰まり演出用 */
     transition: padding-top 0.4s ease;
 }
 
-/* 告知が消えたらヘッダーを詰める */
-.site-header.is-notice-hidden .site-header-inner {
-    padding-top: 8px;
-}
 
-.site-logo {
-    font-size: 20px;
-    font-weight: normal;
-    letter-spacing: 0.05em;
-}
-
-.site-logo-link {
-    text-decoration: none;
-    color: inherit;
-}
-
-.site-logo-link:hover {
-    opacity: 0.85;
-}
-
-/* ===== 告知バー ===== */
+/* =====================================================
+   告知バー（スクロールで消える）
+   ===================================================== */
 .notice-bar {
     background-color: #f5f5f5;
     border-bottom: 1px solid #e5e5e5;
+
+    /* フェード＋スライド演出 */
     transition:
         opacity 0.4s ease,
         transform 0.4s ease,
@@ -66,28 +51,15 @@ body {
     text-align: center;
 }
 
-/* 強調：送料無料 */
+/* 強調表示（送料無料） */
 .notice-free {
+    margin-left: 4px;
     font-size: 14px;
     font-weight: bold;
     color: #b00020;
-    margin-left: 4px;
 }
 
-/* 自然に上へ流れて、ふわっと消える */
-
-/* ヘッダー全体をアニメーション対象に */
-.site-header {
-    transition: padding-top 0.4s ease;
-}
-
-.notice-bar {
-    transition:
-        opacity 0.4s ease,
-        transform 0.4s ease;
-}
-
-/* スクロール後に消える状態 */
+/* スクロール後：告知バー非表示状態 */
 .notice-bar.is-hidden {
     opacity: 0;
     transform: translateY(-100%);
@@ -96,14 +68,50 @@ body {
     pointer-events: none;
 }
 
-/* ===== ヘッダー内部レイアウト ===== */
+
+/* =====================================================
+   ヘッダー内部（ロゴ＋右側アイコン）
+   ===================================================== */
 .site-header-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 12px 32px 8px;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    transition: padding-top 0.4s ease;
 }
 
-/* ===== 右側アイコン ===== */
+/* 告知バーが消えた後、ヘッダーを詰める */
+.site-header.is-notice-hidden .site-header-inner {
+    padding-top: 8px;
+}
+
+
+/* =====================================================
+   ロゴ
+   ===================================================== */
+.site-logo {
+    font-size: 20px;
+    font-weight: normal;
+    letter-spacing: 0.05em;
+}
+
+.site-logo-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.site-logo-link:hover {
+    opacity: 0.85;
+}
+
+
+/* =====================================================
+   ヘッダー右側アイコン群
+   ===================================================== */
 .header-icons {
     display: flex;
     gap: 20px;
@@ -119,49 +127,29 @@ body {
     color: #000;
 }
 
-/* アイコンサイズ */
+/* Material Icons サイズ調整 */
 .header-icon .material-icons-outlined {
     font-size: 20px;
 }
 
 
-/* ===== メイン ===== */
+/* =====================================================
+   メインコンテンツ
+   ===================================================== */
 .site-main {
     max-width: 960px;
     margin: 180px auto 40px;
     padding: 0 16px;
 }
 
-/* ===== 商品一覧 ===== */
+
+/* =====================================================
+   商品一覧
+   ===================================================== */
 .page-title {
     font-size: 18px;
     font-weight: normal;
     margin-bottom: 32px;
-}
-
-.grimoire-title {
-    font-size: 16px;
-    font-weight: normal;
-}
-
-.grimoire-link {
-    text-decoration: none;
-    color: #333;
-}
-
-.grimoire-link:hover {
-    text-decoration: underline;
-}
-
-.grimoire-price,
-.in-stock,
-.sold-out {
-    font-size: 13px;
-    color: #777;
-}
-
-.sold-out {
-    color: #b00020;
 }
 
 .grimoire-list {
@@ -175,21 +163,16 @@ body {
 }
 
 .grimoire-item {
-    padding: 0;
-    border-bottom: none;
     text-align: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .grimoire-thumb {
+    display: block;
     width: 100%;
     max-width: 180px;
-    height: auto;
     margin: 0 auto 8px;
-    display: block;
-}
-
-.grimoire-info {
-    margin-top: 4px;
+    transition: transform 0.25s ease;
 }
 
 .grimoire-info > * {
@@ -197,58 +180,84 @@ body {
     margin-bottom: 2px;
 }
 
-/* カード全体リンク */
-.grimoire-card-link {
+.grimoire-title {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.grimoire-price,
+.in-stock,
+.sold-out {
+    font-size: 13px;
+    color: #777;
+}
+
+.sold-out {
+    color: #b00020;
+}
+
+/* 商品カードリンク */
+.grimoire-card {
     display: block;
-    text-decoration: none;
     color: inherit;
+    text-decoration: none;
 }
 
-/* ===== 商品ホバー演出 ===== */
+/* 状態すべて統一 */
+.grimoire-card:link,
+.grimoire-card:visited,
+.grimoire-card:hover,
+.grimoire-card:active {
+    color: inherit;
+    text-decoration: none;
+}
 
+/* 中身も念押し */
+.grimoire-card * {
+    text-decoration: none;
+}
+
+/* =====================================================
+   商品ホバー演出
+   ===================================================== */
 /* カード全体 */
-.grimoire-item {
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-/* ホバー時 */
 .grimoire-item:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* 画像を少し拡大 */
-.grimoire-item:hover .grimoire-thumb {
-    transform: scale(1.05);
-}
-
-/* 画像側にもトランジション */
-.grimoire-thumb {
-    transition: transform 0.25s ease;
-}
-
-/* ===== 売り切れ表現 ===== */
-
-.grimoire-item.is-sold-out {
-    opacity: 0.5;
-}
-
-/* 売り切れはホバーさせない */
+/* 売り切れは全体ホバー無効 */
 .grimoire-item.is-sold-out:hover {
     transform: none;
     box-shadow: none;
 }
 
-/* カーソルも通常に */
+/* 画像ホバーは売り切れ除外 */
+.grimoire-item:not(.is-sold-out):hover .grimoire-thumb {
+    transform: scale(1.05);
+}
+
+/* =====================================================
+   売り切れ表現
+   ===================================================== */
 .grimoire-item.is-sold-out {
+    opacity: 0.5;
     cursor: default;
+}
+
+.grimoire-item.is-sold-out:hover {
+    transform: none;
+    box-shadow: none;
 }
 
 .grimoire-item.is-sold-out .grimoire-thumb {
     filter: grayscale(100%);
 }
 
-/* ===== ページネーション ===== */
+
+/* =====================================================
+   ページネーション
+   ===================================================== */
 .pagination {
     margin-top: 40px;
     text-align: center;
@@ -256,9 +265,9 @@ body {
 }
 
 .pagination a {
+    margin: 0 12px;
     color: #333;
     text-decoration: none;
-    margin: 0 12px;
 }
 
 .pagination a:hover {
@@ -266,7 +275,9 @@ body {
 }
 
 
-/* ===== フッター ===== */
+/* =====================================================
+   フッター
+   ===================================================== */
 .site-footer {
     margin-top: 80px;
     border-top: 1px solid #e5e5e5;
@@ -283,22 +294,22 @@ body {
 }
 
 
-/* 商品詳細の画像 */
+/* =====================================================
+   商品詳細
+   ===================================================== */
 .grimoire-image {
     max-width: 100%;
     margin: 24px 0;
 }
 
 
-/* ===== スマホ表示（2列） ===== */
+/* =====================================================
+   レスポンシブ（スマホ）
+   ===================================================== */
 @media (max-width: 600px) {
     .grimoire-list {
         grid-template-columns: repeat(2, 1fr);
         gap: 16px;
-    }
-
-    .grimoire-thumb {
-        max-width: 100%;
     }
 
     .grimoire-title {

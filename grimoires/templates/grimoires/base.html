@@ -2,43 +2,54 @@
 <!DOCTYPE html>
 <html lang="ja" class="site-root">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport"
-              content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title class="site-title">📔 Arcane Grimoire Market 📔</title>
+    <title class="site-title">📔 Arcane Grimoire Market 📔</title>
 
-        <link rel="stylesheet"
-            href="{% static 'grimoires/css/style.css' %}">
-        
-        <!-- Material Icons -->    
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
-            rel="stylesheet">
+    <!-- メインCSS -->
+    <link rel="stylesheet"
+        href="{% static 'grimoires/css/style.css' %}">
+    
+    <!-- Material Icons -->    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+        rel="stylesheet">
 
-    </head>
+</head>
 
-    <body class="site-body">
+<body class="site-body">
 
-        <header class="site-header">
+    <!-- =================================================
+        ヘッダー（固定）
+        ================================================= -->
+    <header class="site-header">
 
-            <div class="notice-bar">
-                <span class="notice-text">
-                    ２冊以上購入で
-                    <span class="notice-free">送料無料</span>
-                </span>
-            </div>
+        <!-- 告知バー（スクロールで消える） -->
+        <div class="notice-bar">
+            <span class="notice-text">
+                ２冊以上購入で
+                <span class="notice-free">送料無料</span>
+            </span>
+        </div>
 
-            <div class="site-header-inner">
+        <!-- ヘッダー内部（ロゴ＋ナビ） -->
+        <div class="site-header-inner">
 
-                <h1 class="site-logo">
-                    <a href="{% url 'grimoires:grimoire_list' %}"
-                    class="site-logo-link">
-                        Arcane Grimoire Market
-                    </a>
-                </h1>
+            <!-- ロゴ -->
+            <h1 class="site-logo">
+                <a href="{% url 'grimoires:grimoire_list' %}"
+                class="site-logo-link">
+                    Arcane Grimoire Market
+                </a>
+            </h1>
 
-                <nav class="header-icons">
+            <!-- ヘッダーナビゲーション -->
+            <nav class="header-nav">
+
+                <!-- PC表示用アイコン群 -->
+                <div class="header-icons">
                     <a href="#" class="header-icon" title="検索">
                         <span class="material-icons-outlined">search</span>
                     </a>
@@ -51,44 +62,62 @@
                     <a href="#" class="header-icon" title="おしらせ">
                         <span class="material-icons-outlined">notifications</span>
                     </a>
-                </nav>
+                </div>
 
-            </div>
+                <!--
+                ▼ 将来ここにハンバーガーボタンを追加予定
+                <button class="hamburger" aria-label="menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                -->
 
-        </header>
+            </nav>
 
-        <main class="site-main">
-            {% block content %}
-            {% endblock %}
-        </main>
+        </div>
+    </header>
 
-        <footer class="site-footer">
-            <div class="site-footer-inner">
-                <p class="site-footer-text">
-                    © Arcane Grimoire Market
-                </p>
-            </div>
-        </footer>
+    <!-- =================================================
+        メインコンテンツ
+        ================================================= -->
+    <main class="site-main">
+        {% block content %}
+        {% endblock %}
+    </main>
 
-        <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const noticeBar = document.querySelector('.notice-bar');
-            const siteHeader = document.querySelector('.site-header');
+    <!-- =================================================
+        フッター
+        ================================================= -->
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <p class="site-footer-text">
+                © Arcane Grimoire Market
+            </p>
+        </div>
+    </footer>
 
-            if (!noticeBar || !siteHeader) return;
+    <!-- =================================================
+        スクロール時：告知バー制御
+        ================================================= -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const noticeBar = document.querySelector('.notice-bar');
+        const siteHeader = document.querySelector('.site-header');
 
-            window.addEventListener('scroll', function () {
-                if (window.scrollY > 80) {
-                    noticeBar.classList.add('is-hidden');
-                    siteHeader.classList.add('is-notice-hidden');
-                } else {
-                    noticeBar.classList.remove('is-hidden');
-                    siteHeader.classList.remove('is-notice-hidden');
-                }
-            });
+        if (!noticeBar || !siteHeader) return;
+
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 80) {
+                noticeBar.classList.add('is-hidden');
+                siteHeader.classList.add('is-notice-hidden');
+            } else {
+                noticeBar.classList.remove('is-hidden');
+                siteHeader.classList.remove('is-notice-hidden');
+            }
         });
-        </script>
+    });
+    </script>
 
-    </body>
-    
+</body>
 </html>

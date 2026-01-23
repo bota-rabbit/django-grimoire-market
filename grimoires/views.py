@@ -7,7 +7,7 @@ from .models import Grimoire, Order, OrderItem
 class GrimoireListView(generic.ListView):
     model = Grimoire
     paginate_by = 12    # 1ページに表示する件数
-    ordering = ['-created_at']    # 表示順序の指定
+    ordering = ['created_at']    # 表示順序の指定
 
 class GrimoireDetailView(generic.DetailView):
     model = Grimoire

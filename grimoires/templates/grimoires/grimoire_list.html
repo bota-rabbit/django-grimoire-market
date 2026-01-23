@@ -1,33 +1,41 @@
 {% extends 'grimoires/base.html' %}
+{% load static %}
+
 {% block content %}
 
 <div class="grimoire-list-page">
 
+    <!-- ページタイトル -->
     <h1 class="page-title">商品一覧</h1>
 
     {% if object_list %}
         <ul class="grimoire-list">
+
             {% for grimoire in object_list %}
-                <li class="grimoire-item {% if grimoire.stock <= 0 %}is-sold-out{% endif %}">
+                <li class="grimoire-item 
+                    {% if grimoire.stock <= 0 %}is-sold-out{% endif %}">
                     
                     {% if grimoire.stock > 0 %}
                         <a href="{% url 'grimoires:grimoire_detail' grimoire.pk %}"
-                        class="grimoire-card-link">
+                           class="grimoire-card">
+                    {% else %}
+                        <div class="grimoire-card is-disabled">
                     {% endif %}
 
-                        {% load static %}
-
+                        <!-- サムネイル -->
                         {% if grimoire.image %}
                             <img src="{{ grimoire.image.url }}"
-                                alt="{{ grimoire.title }}"
-                                class="grimoire-thumb">
+                                 alt="{{ grimoire.title }}"
+                                 class="grimoire-thumb">
                         {% else %}
                             <img src="{% static 'grimoires/images/no-image.png' %}"
-                                alt="no image"
-                                class="grimoire-thumb">
+                                 alt="no image"
+                                 class="grimoire-thumb">
                         {% endif %}
                         
+                        <!-- 情報 -->
                         <div class="grimoire-info">
+
                             <strong class="grimoire-title">
                                 {{ grimoire.title }}
                             </strong>
@@ -37,24 +45,35 @@
                             </span>
 
                             {% if grimoire.stock > 0 %}
-                                <span class="in-stock">在庫:{{ grimoire.stock }}</span>
+                                <span class="in-stock">
+                                    在庫:{{ grimoire.stock }}
+                                </span>
                             {% else %}
-                                <span class="sold-out">売り切れ</span>
+                                <span class="sold-out">
+                                    売り切れ
+                                </span>
                             {% endif %}
+
                         </div>
 
                     {% if grimoire.stock > 0 %}
                         </a>
+                    {% else %}
+                        </div>
                     {% endif %}
 
                 </li>
             {% endfor %}
+
         </ul>
+
     {% else %}
-        <p class="no-items-message">商品がありません。</p>
+        <p class="no-items-message">
+            商品がありません。
+        </p>
     {% endif %}
 
-    <!-- ページ送り -->
+    <!-- ページネーション -->
     {% if is_paginated %}
         <div class="pagination">
 
@@ -66,7 +85,9 @@
             {% endif %}
 
             <span class="pagination-info">
-                ページ {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                ページ {{ page_obj.number }}
+                / 
+                {{ page_obj.paginator.num_pages }}
             </span>
 
             {% if page_obj.has_next %}
