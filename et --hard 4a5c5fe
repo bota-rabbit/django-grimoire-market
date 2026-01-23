@@ -1,6 +1,0 @@
-[33m4a5c5fe[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Hide notice bar on scroll and adjust header layout
-[33m7fddea8[m style: fix header and add banner icons with Material Icons
-[33m9577262[m Add order and order item creation on purchase
-[33m3f61fc6[m Add grimoire list and detail page templates
-[33me2f3c48[m Add core models and initial migrations
-[33mca751ad[m first commit
