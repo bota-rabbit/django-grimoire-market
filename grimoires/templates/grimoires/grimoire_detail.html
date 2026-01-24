@@ -5,52 +5,72 @@
 
     {% load static %}
 
-    {% if grimoire.image %}
-        <img src="{{ grimoire.image.url }}"
-            alt="{{ grimoire.title }}"
-            class="grimoire-image">
-    {% else %}
-        <img src="{% static 'grimoires/images/no-image.png' %}"
-            alt="no image"
-            class="grimoire-image">
-    {% endif %}
+    <!-- =========================================
+         画像＋情報 全体ラッパー（横並び用）
+         ========================================= -->
+    <div class="grimoire-detail-main">
 
-    <h1 class="grimoire-title">
-        {{ grimoire.title }}
-    </h1>
+        <!-- ===== 左：画像エリア ===== -->
+        <div class="grimoire-image-wrap">
+            {% if grimoire.image %}
+                <img src="{{ grimoire.image.url }}"
+                    alt="{{ grimoire.title }}"
+                    class="grimoire-image">
+            {% else %}
+                <img src="{% static 'grimoires/images/no-image.png' %}"
+                    alt="no image"
+                    class="grimoire-image">
+            {% endif %}
+        </div>
 
-    <div class="grimoire-detail">
+        <!-- ===== 右：情報エリア ===== -->
+        <div class="grimoire-info">
 
-        <p class="grimoire-price">
-            価格: 💎{{ grimoire.price }}
-        </p>
+            <!-- タイトル -->
+            <h1 class="grimoire-title">
+                {{ grimoire.title }}
+            </h1>
 
-        <p class="grimoire-description">
-            解説: {{ grimoire.description }}
-        </p>
+            <!-- 価格 -->
+            <p class="grimoire-price">
+                価格: 💎{{ grimoire.price }}
+            </p>
 
-        <p class="grimoire-stock">
-            在庫: {{ grimoire.stock }}
-        </p>
+            <!-- 在庫 -->
+            <p class="grimoire-stock">
+                在庫: {{ grimoire.stock }}
+            </p>
+
+            <!-- ===== 購入エリア ===== -->
+            <div class="grimoire-actions">
+                {% if grimoire.stock > 0 %}
+                    <form method="post" action="{% url 'grimoires:create_order' grimoire.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-buy">
+                            購入する
+                        </button>
+                    </form>
+                {% else %}
+                    <p class="sold-out">売り切れ</p>
+                {% endif %}
+            </div>
+
+            <!-- 解説 -->
+            <p class="grimoire-description">
+                解説: {{ grimoire.description }}
+            </p>
+
+            <!-- 一覧へ戻る -->
+            <a href="{% url 'grimoires:grimoire_list' %}"
+               class="back-to-list">
+                一覧に戻る
+            </a>
+
+        </div>
+        <!-- /grimoire-info -->
 
     </div>
-
-    <div class="grimoire-actions">
-
-        {% if grimoire.stock > 0 %}
-            <form method="post" action="{% url 'grimoires:create_order' grimoire.id %}">
-                {% csrf_token %}
-                <button type="submit" class="btn-buy">購入する</button>
-            </form>
-        {% else %}
-            <p class="sold-out">売り切れ</p>
-        {% endif %}
-
-        <a href="{% url 'grimoires:grimoire_list' %}"
-           class="back-to-list">
-            一覧に戻る
-        </a>
-    </div>
+    <!-- /grimoire-detail-main -->
 
 </div>
 

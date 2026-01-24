@@ -316,11 +316,68 @@ body {
 /* =====================================================
    商品詳細
    ===================================================== */
-.grimoire-image {
-    max-width: 100%;
-    margin: 24px 0;
+
+/* ===== 全体レイアウト ===== */
+.grimoire-detail-main {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
 }
 
+/* ===== 左：画像 ===== */
+.grimoire-image-wrap {
+    flex: 0 0 300px;
+}
+
+.grimoire-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+/* ===== 右：情報 ===== */
+.grimoire-info {
+    flex: 1;
+}
+
+.grimoire-detail-page .grimoire-title {
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.grimoire-detail-page .grimoire-price {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.grimoire-description {
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.grimoire-stock {
+    margin-bottom: 20px;
+}
+
+/* ===== 操作エリア ===== */
+.grimoire-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-buy {
+    padding: 10px 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.back-to-list {
+    font-size: 14px;
+    text-decoration: underline;
+}
 
 /* =====================================================
    レスポンシブ（スマホ）
@@ -406,5 +463,43 @@ body {
     .hamburger.is-open span:nth-child(3) {
         transform: rotate(-45deg);
         top: 8px;
+    }
+}
+
+
+/* =====================================================
+   商品詳細：スマホ
+   ===================================================== */
+@media (max-width: 600px) {
+
+    /* 横並び → 縦並び */
+    .grimoire-detail-main {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    /* 画像は横幅いっぱい */
+    .grimoire-image-wrap {
+        flex: none;
+        width: 100%;
+        text-align: center;
+    }
+
+    .grimoire-image {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    /* タイトル少し小さめ */
+    .grimoire-detail-page .grimoire-title {
+        font-size: 20px;
+    }
+
+    .grimoire-detail-page .grimoire-price {
+        font-size: 18px;
+    }
+
+    .btn-buy {
+        width: 100%;
     }
 }
