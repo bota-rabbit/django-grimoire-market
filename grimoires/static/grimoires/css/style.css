@@ -132,6 +132,25 @@ body {
     font-size: 20px;
 }
 
+/* ハンバーガー（共通） */
+.hamburger {
+    display: none;   /* ← PCでは隠す */
+    width: 32px;
+    height: 24px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* 三本線 */
+.hamburger span {
+    display: block;
+    height: 2px;
+    margin: 5px 0;
+    background: #333;
+}
+
 
 /* =====================================================
    メインコンテンツ
@@ -320,5 +339,72 @@ body {
     .in-stock,
     .sold-out {
         font-size: 12px;
+    }
+
+    /* PC用アイコンを隠す */
+    .header-icons {
+        display: none;
+    }
+
+    /* ハンバーガーを表示 */
+    .hamburger {
+        display: block;
+        margin: 0 auto;  
+        width: 24px;
+        height: 36px;
+        position: relative;
+        border: none;
+        background: none;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    /* ハンバーガーの線（3本線） */
+    .hamburger span {
+        display: block;
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        background-color: #333;
+        transition: all 0.2s ease;
+    }
+
+    .hamburger span:nth-child(1) { top: 0; }
+    .hamburger span:nth-child(2) { top: 8px; }
+    .hamburger span:nth-child(3) { top: 16px; }
+
+    /* ===== ハンバーガー展開時 ===== */
+    .header-nav.is-open {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: auto; 
+        background: #fff;
+        border-top: 1px solid #e5e5e5;
+        z-index: 1001;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        border-radius: 8px;
+    }
+
+    .header-nav.is-open .header-icons {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 12px 16px;
+    }
+
+    /* ===== ハンバーガーが☰ → ✕ に変化 ===== */
+    .hamburger.is-open span:nth-child(1) {
+        transform: rotate(45deg);
+        top: 8px;
+    }
+
+    .hamburger.is-open span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.is-open span:nth-child(3) {
+        transform: rotate(-45deg);
+        top: 8px;
     }
 }

@@ -64,14 +64,12 @@
                     </a>
                 </div>
 
-                <!--
-                ▼ 将来ここにハンバーガーボタンを追加予定
+                <!-- スマホ用ハンバーガー -->
                 <button class="hamburger" aria-label="menu">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
-                -->
 
             </nav>
 
@@ -97,16 +95,19 @@
         </div>
     </footer>
 
-    <!-- =================================================
-        スクロール時：告知バー制御
-        ================================================= -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const noticeBar = document.querySelector('.notice-bar');
-        const siteHeader = document.querySelector('.site-header');
+<script>
+/* =================================================
+   DOMContentLoaded
+   ================================================= */
+document.addEventListener('DOMContentLoaded', function () {
 
-        if (!noticeBar || !siteHeader) return;
+    /* =================================================
+       スクロール時：告知バー制御
+       ================================================= */
+    const noticeBar = document.querySelector('.notice-bar');
+    const siteHeader = document.querySelector('.site-header');
 
+    if (noticeBar && siteHeader) {
         window.addEventListener('scroll', function () {
             if (window.scrollY > 80) {
                 noticeBar.classList.add('is-hidden');
@@ -116,8 +117,45 @@
                 siteHeader.classList.remove('is-notice-hidden');
             }
         });
+    }
+
+    /* =================================================
+       ハンバーガーメニュー開閉制御（☰ → ✕ 切替含む）
+       ================================================= */
+    const hamburger = document.querySelector('.hamburger');
+    const headerNav = document.querySelector('.header-nav');
+    const navLinks = headerNav ? headerNav.querySelectorAll('a') : [];
+
+    if (!hamburger || !headerNav) return;
+
+    // ハンバーガー開閉
+    hamburger.addEventListener('click', function () {
+        headerNav.classList.toggle('is-open');
+        hamburger.classList.toggle('is-open');  // ☰ → ✕ 切替
     });
-    </script>
+
+
+    // メニュー内リンククリックで自動クローズ
+    navLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+            headerNav.classList.remove('is-open');
+            hamburger.classList.remove('is-open');
+        });
+    });
+
+    /* =================================================
+       メニュー外クリックで閉じる
+       ================================================= */
+    document.addEventListener('click', function (e) {
+        // メニューとハンバーガー以外をクリックした場合
+        if (!headerNav.contains(e.target) && !hamburger.contains(e.target)) {
+            headerNav.classList.remove('is-open');
+            hamburger.classList.remove('is-open');
+        }
+    });
+
+});
+</script>
 
 </body>
 </html>
