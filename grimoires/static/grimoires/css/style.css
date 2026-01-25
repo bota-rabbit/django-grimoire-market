@@ -208,6 +208,13 @@ body {
 .in-stock,
 .sold-out {
     font-size: 13px;
+}
+
+.grimoire-price {
+    color: #9c2a2a; 
+}
+
+.in-stock {
     color: #777;
 }
 
@@ -368,16 +375,53 @@ body {
     gap: 12px;
 }
 
-.btn-buy {
-    padding: 10px 16px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
 .back-to-list {
     font-size: 14px;
     text-decoration: underline;
 }
+
+/* ===== 購入ボタン ===== */
+.btn-buy {
+    display: inline-block;
+    width: 100%;
+    max-width: 280px;
+
+    padding: 14px 24px;
+    margin: 16px 0;
+    margin-top: 28px;     /* 情報からしっかり距離を取る */
+    margin-bottom: 16px;  /* 下は控えめ */
+
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+
+    color: #fff;
+    background: #9c2a2a; /* 価格と色を揃えて統一感 */
+
+    border: none;
+    border-radius: 999px;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease,
+                transform 0.1s ease,
+                box-shadow 0.2s ease;
+
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* 購入ボタンホバー */
+.btn-buy:hover {
+    background: #7f1f1f;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* 購入ボタン押した瞬間 */
+.btn-buy:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
+}
+
 
 /* =====================================================
    レスポンシブ（スマホ）
@@ -499,7 +543,26 @@ body {
         font-size: 18px;
     }
 
+    /* 購入エリアを最下部に固定 */
+    .grimoire-actions {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 12px 16px 16px;
+        background: #fff;
+        border-top: 1px solid #e5e5e5;
+        z-index: 1000;
+    }
+
     .btn-buy {
         width: 100%;
+        box-sizing: border-box;
+
+        padding: 16px 24px;
+        font-size: 16px;
+        border-radius: 999px;
+        margin: 0;
     }
+
 }
